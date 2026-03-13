@@ -1,0 +1,33 @@
+{
+  "sidebar": {
+    "generate": "Generar",
+    "voices": "Voces",
+    "stories": "Historias",
+    "audio": "Audio",
+    "models": "Modelos",
+    "settings": "Servidor"
+  },
+  "generation": {
+    "placeholder": "Generar habla usando {{voice}}...",
+    "placeholder_story": "Generar habla para \"{{name}}\"...",
+    "select_voice": "Selecciona un perfil de voz arriba...",
+    "instruct_placeholder": "ej. muy feliz y emocionado",
+    "generating": "Generando...",
+    "select_voice_first": "Selecciona un perfil de voz primero",
+    "button_generate": "Generar habla",
+    "fine_tune": "Afinar instrucciones",
+    "importVoice": "Importar Voz",
+    "createVoice": "Crear Voz"
+  },
+  "server": {
+    "title": "Estado del Servidor",
+    "url": "URL del Servidor",
+    "checking": "Comprobando conexión...",
+    "failed": "Conexión fallida: {{message}}",
+    "connected": "Conectado",
+    "model_ready": "Modelo Listo",
+    "no_model": "Sin Modelo",
+    "gpu_available": "Disponible",
+    "gpu_not_available": "No Disponible"
+  }
+}

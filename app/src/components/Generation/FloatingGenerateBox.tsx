@@ -20,6 +20,7 @@ import { useAddStoryItem, useStory } from '@/lib/hooks/useStories';
 import { cn } from '@/lib/utils/cn';
 import { useStoryStore } from '@/stores/storyStore';
 import { useUIStore } from '@/stores/uiStore';
+import { useTranslation } from 'react-i18next';
 
 interface FloatingGenerateBoxProps {
   isPlayerOpen?: boolean;
@@ -45,6 +46,7 @@ export function FloatingGenerateBox({
   const { data: currentStory } = useStory(selectedStoryId);
   const addStoryItem = useAddStoryItem();
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   // Calculate if track editor is visible (on stories route with items)
   const hasTrackEditor = isStoriesRoute && currentStory && currentStory.items.length > 0;
@@ -224,13 +226,13 @@ export function FloatingGenerateBox({
                                   field.ref(node);
                                 }
                               }}
-                              placeholder={
-                                isStoriesRoute && currentStory
-                                  ? `Generate speech for "${currentStory.name}"...`
-                                  : selectedProfile
-                                    ? `Generate speech using ${selectedProfile.name}...`
-                                    : 'Select a voice profile above...'
-                              }
+                                placeholder={
+                                  isStoriesRoute && currentStory
+                                    ? t('generation.placeholder_story', { name: currentStory.name, defaultValue: `Generate speech for "${currentStory.name}"...` })
+                                    : selectedProfile
+                                      ? t('generation.placeholder', { voice: selectedProfile.name })
+                                      : t('generation.select_voice', { defaultValue: 'Select a voice profile above...' })
+                                }
                               className="resize-none bg-transparent border-none focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none focus:ring-0 outline-none ring-0 rounded-2xl text-sm placeholder:text-muted-foreground/60 w-full"
                               style={{
                                 minHeight: isExpanded ? '100px' : '32px',
@@ -274,7 +276,7 @@ export function FloatingGenerateBox({
                                   field.ref(node);
                                 }
                               }}
-                              placeholder="e.g. very happy and excited"
+                              placeholder={t('generation.instruct_placeholder', { defaultValue: "e.g. very happy and excited" })}
                               className="resize-none bg-transparent border-none focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none focus:ring-0 outline-none ring-0 rounded-2xl text-sm placeholder:text-muted-foreground/60 w-full"
                               style={{
                                 minHeight: isExpanded ? '100px' : '32px',
@@ -309,10 +311,10 @@ export function FloatingGenerateBox({
                   </Button>
                   <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap rounded-md bg-popover px-3 py-1.5 text-xs text-popover-foreground border border-border opacity-0 transition-opacity group-hover:opacity-100 z-[9999]">
                     {isPending
-                      ? 'Generating...'
+                      ? t('generation.generating', { defaultValue: 'Generating...' })
                       : !selectedProfileId
-                        ? 'Select a voice profile first'
-                        : 'Generate speech'}
+                        ? t('generation.select_voice_first', { defaultValue: 'Select a voice profile first' })
+                        : t('generation.button_generate', { defaultValue: 'Generate speech' })}
                   </span>
                 </div>
                 <AnimatePresence>
@@ -340,7 +342,7 @@ export function FloatingGenerateBox({
                           <SlidersHorizontal className="h-4 w-4" />
                         </Button>
                         <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap rounded-md bg-popover px-3 py-1.5 text-xs text-popover-foreground border border-border opacity-0 transition-opacity group-hover:opacity-100 z-[9999]">
-                          Fine tune instructions
+                          {t('generation.fine_tune', { defaultValue: 'Fine tune instructions' })}
                         </span>
                       </div>
                     </motion.div>

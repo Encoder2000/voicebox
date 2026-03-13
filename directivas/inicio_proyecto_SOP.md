@@ -13,7 +13,7 @@ Configurar el entorno de desarrollo y poner en marcha los componentes de Voicebo
 
 ## Entradas
 - Repositorio clonado y auditado.
-- Herramientas instaladas: Bun, Python 3.10+.
+- Herramientas instaladas: Bun, Python 3.10+, Rust (rustc/cargo).
 
 ## Salidas
 - Aplicación en ejecución (Modo Dev).

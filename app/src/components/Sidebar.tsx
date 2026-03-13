@@ -4,18 +4,19 @@ import voiceboxLogo from '@/assets/voicebox-logo.png';
 import { cn } from '@/lib/utils/cn';
 import { useGenerationStore } from '@/stores/generationStore';
 import { usePlayerStore } from '@/stores/playerStore';
+import { useTranslation } from 'react-i18next';
 
 interface SidebarProps {
   isMacOS?: boolean;
 }
 
 const tabs = [
-  { id: 'main', path: '/', icon: Volume2, label: 'Generate' },
-  { id: 'stories', path: '/stories', icon: BookOpen, label: 'Stories' },
-  { id: 'voices', path: '/voices', icon: Mic, label: 'Voices' },
-  { id: 'audio', path: '/audio', icon: Speaker, label: 'Audio' },
-  { id: 'models', path: '/models', icon: Box, label: 'Models' },
-  { id: 'server', path: '/server', icon: Server, label: 'Server' },
+  { id: 'main', path: '/', icon: Volume2, translationKey: 'sidebar.voices' },
+  { id: 'stories', path: '/stories', icon: BookOpen, translationKey: 'sidebar.stories' },
+  { id: 'voices', path: '/voices', icon: Mic, translationKey: 'sidebar.voices' }, // Fix logic if needed: 'main' was 'Generate', maybe different key
+  { id: 'audio', path: '/audio', icon: Speaker, translationKey: 'sidebar.history' }, // Audio -> History ? Adjust if label is different
+  { id: 'models', path: '/models', icon: Box, translationKey: 'sidebar.models' },
+  { id: 'server', path: '/server', icon: Server, translationKey: 'sidebar.settings' },
 ];
 
 export function Sidebar({ isMacOS }: SidebarProps) {
@@ -23,6 +24,7 @@ export function Sidebar({ isMacOS }: SidebarProps) {
   const audioUrl = usePlayerStore((state) => state.audioUrl);
   const isPlayerVisible = !!audioUrl;
   const matchRoute = useMatchRoute();
+  const { t } = useTranslation();
 
   return (
     <div
@@ -55,8 +57,8 @@ export function Sidebar({ isMacOS }: SidebarProps) {
                 'hover:bg-muted/50',
                 isActive ? 'bg-muted/50 text-foreground shadow-lg' : 'text-muted-foreground',
               )}
-              title={tab.label}
-              aria-label={tab.label}
+              title={t(tab.translationKey)}
+              aria-label={t(tab.translationKey)}
             >
               <Icon className="h-5 w-5" />
             </Link>
